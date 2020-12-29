@@ -1,0 +1,3 @@
+include ':feature_a'
+include ':app'
+rootProject.name = "CleanArchitectureBlueprints"
