@@ -1,3 +1,5 @@
-include ':feature_a'
+include ':data'
+include ':domain'
+include ':usecases'
 include ':app'
 rootProject.name = "CleanArchitectureBlueprints"
