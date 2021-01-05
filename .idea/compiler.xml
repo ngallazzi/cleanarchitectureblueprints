@@ -5,6 +5,7 @@
       <module name="CleanArchitectureBlueprints.app" target="1.8" />
       <module name="CleanArchitectureBlueprints.app.feature_a" target="1.8" />
       <module name="CleanArchitectureBlueprints.app.feature_b" target="1.8" />
+      <module name="CleanArchitectureBlueprints.data" target="1.8" />
       <module name="CleanArchitectureBlueprints.products" target="1.8" />
     </bytecodeTargetLevel>
   </component>
