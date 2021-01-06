@@ -2,6 +2,7 @@ package com.ngallazzi.data.db
 
 import androidx.room.*
 import com.ngallazzi.data.entities.BookEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BookDao {
@@ -10,7 +11,7 @@ interface BookDao {
     suspend fun saveBook(book: BookEntity)
 
     @Query("SELECT * FROM book")
-    suspend fun getSavedBooks(): List<BookEntity>
+    fun getSavedBooks(): Flow<List<BookEntity>>
 
     @Delete
     suspend fun deleteBook(book: BookEntity)

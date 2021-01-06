@@ -6,6 +6,10 @@ import com.ngallazzi.data.mappers.BookEntityMapper
 import com.ngallazzi.domain.entities.Volume
 import com.ngallazzi.domain.entities.VolumeInfo
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 class BooksLocalDataSourceImpl(
@@ -13,16 +17,20 @@ class BooksLocalDataSourceImpl(
     private val dispatcher: CoroutineDispatcher,
     private val bookEntityMapper: BookEntityMapper
 ) : BooksLocalDataSource {
-    override suspend fun saveBook(book: Volume) = withContext(dispatcher) {
+    override suspend fun bookmark(book: Volume) = withContext(dispatcher) {
         bookDao.saveBook(bookEntityMapper.toBookEntity(book))
     }
 
-    override suspend fun deleteBook(book: Volume) = withContext(dispatcher) {
+    override suspend fun unbookmark(book: Volume) = withContext(dispatcher) {
         bookDao.deleteBook(bookEntityMapper.toBookEntity(book))
     }
 
-    override suspend fun getSavedBooks(): List<Volume> = withContext(dispatcher) {
-        return@withContext bookDao.getSavedBooks()
-            .map { bookEntityMapper.toVolume(it) }
+    override suspend fun getBookmarks(): Flow<List<Volume>> {
+        val savedBooksFlow = bookDao.getSavedBooks()
+        return savedBooksFlow.map { list ->
+            list.map { element ->
+                bookEntityMapper.toVolume(element)
+            }
+        }
     }
 }

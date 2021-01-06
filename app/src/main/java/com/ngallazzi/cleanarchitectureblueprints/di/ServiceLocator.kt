@@ -7,6 +7,7 @@ import com.ngallazzi.data.repositories.books.BooksLocalDataSourceImpl
 import com.ngallazzi.data.repositories.books.BooksRemoteDataSourceImpl
 import com.ngallazzi.data.api.NetworkModule
 import com.ngallazzi.data.mappers.BookApiResponseMapper
+import com.ngallazzi.data.mappers.BookEntityMapper
 import com.ngallazzi.data.repositories.books.BooksRepositoryImpl
 import com.ngallazzi.data.repositories.books.BooksLocalDataSource
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,9 @@ object ServiceLocator {
     private var database: BooksDatabase? = null
     private val networkModule by lazy {
         NetworkModule()
+    }
+    private val bookEntityMapper by lazy {
+        BookEntityMapper()
     }
 
     @Volatile
@@ -44,7 +48,8 @@ object ServiceLocator {
         val database = database ?: createDataBase(context)
         return BooksLocalDataSourceImpl(
             database.bookDao(),
-            Dispatchers.IO
+            Dispatchers.IO,
+            bookEntityMapper
         )
     }
 
