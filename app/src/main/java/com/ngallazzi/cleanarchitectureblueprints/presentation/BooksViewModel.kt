@@ -4,10 +4,14 @@ import androidx.lifecycle.*
 import com.ngallazzi.domain.common.Result
 import com.ngallazzi.domain.entities.Volume
 import com.ngallazzi.domain.usecases.GetBooksUseCase
+import com.ngallazzi.domain.usecases.SaveBookUseCase
 import kotlinx.coroutines.launch
 
 
-class BooksViewModel(private val getBooksUseCase: GetBooksUseCase) : ViewModel() {
+class BooksViewModel(
+    private val getBooksUseCase: GetBooksUseCase,
+    private val saveBookUseCase: SaveBookUseCase
+) : ViewModel() {
 
     private val _dataLoading = MutableLiveData(true)
     val dataLoading: LiveData<Boolean> = _dataLoading
@@ -17,6 +21,9 @@ class BooksViewModel(private val getBooksUseCase: GetBooksUseCase) : ViewModel()
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
+
+    private val _saved = MutableLiveData<Boolean>()
+    val saved = _saved
 
     // Getting books with uncle bob as default author :)
     fun getBooks(author: String = "Robert Martin") {
@@ -35,12 +42,22 @@ class BooksViewModel(private val getBooksUseCase: GetBooksUseCase) : ViewModel()
         }
     }
 
-    class BooksViewModelFactory(private val getBooksUseCase: GetBooksUseCase) :
+    fun saveBook(book: Volume) {
+        viewModelScope.launch {
+            saveBookUseCase.invoke(book)
+            saved.postValue(true)
+        }
+    }
+
+    class BooksViewModelFactory(
+        private val getBooksUseCase: GetBooksUseCase,
+        private val saveBookUseCase: SaveBookUseCase
+    ) :
         ViewModelProvider.NewInstanceFactory() {
 
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return BooksViewModel(getBooksUseCase) as T
+            return BooksViewModel(getBooksUseCase, saveBookUseCase) as T
         }
     }
 }

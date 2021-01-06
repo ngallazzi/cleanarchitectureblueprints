@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ngallazzi.cleanarchitectureblueprints.R
@@ -52,7 +51,6 @@ class BookAdapter(private val context: Context) :
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val clBookInfoContainer: ConstraintLayout = view.findViewById(R.id.clBookInfoContainer)
         val tvBookName: TextView = view.findViewById(R.id.tvBookName)
         val tvBookAuthors: TextView = view.findViewById(R.id.tvBookAuthors)
         val ivBookCover: ImageView = view.findViewById(R.id.ivBookCover)
