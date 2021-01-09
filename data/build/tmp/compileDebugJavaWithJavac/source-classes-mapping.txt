@@ -1,0 +1,12 @@
+com/ngallazzi/data/db/BookDao_Impl.java
+ com.ngallazzi.data.db.BookDao_Impl
+ com.ngallazzi.data.db.BookDao_Impl$1
+ com.ngallazzi.data.db.BookDao_Impl$2
+ com.ngallazzi.data.db.BookDao_Impl$3
+ com.ngallazzi.data.db.BookDao_Impl$4
+ com.ngallazzi.data.db.BookDao_Impl$5
+com/ngallazzi/data/BuildConfig.java
+ com.ngallazzi.data.BuildConfig
+com/ngallazzi/data/db/BooksDatabase_Impl.java
+ com.ngallazzi.data.db.BooksDatabase_Impl
+ com.ngallazzi.data.db.BooksDatabase_Impl$1
