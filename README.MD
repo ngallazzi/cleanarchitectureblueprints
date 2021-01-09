@@ -1,4 +1,4 @@
-# cleanarchitectureblueprints - a pragmatic approach
+#Clean Architecture in Android — a beginner approach
 A clean architecture starting point for android projects
 Check my article on Medium: https://nicola-gallazzi-dev.medium.com/clean-architecture-in-android-a-beginner-approach-be0ce00d806b
 
